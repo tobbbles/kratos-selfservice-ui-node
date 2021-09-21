@@ -20,6 +20,10 @@ export default (req: Request, res: Response, next: NextFunction) => {
       `${config.kratos.browser}/self-service/login/browser`
     )
 
+    if (req.query.return_to) {
+      redirectTo.searchParams.set('return_to', req.query.return_to.toString())
+
+    }
     // If AAL (e.g. 2FA) is requested, forward that to Ory Kratos
     if (req.query.aal) {
       redirectTo.searchParams.set('aal', req.query.aal.toString())
